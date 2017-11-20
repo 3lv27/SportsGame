@@ -53,6 +53,7 @@ passport.deserializeUser((id, cb) => {
     });
 });
 
+<<<<<<< HEAD
 passport.use(new LocalStrategy((username, password, next) => {
     User.findOne({ username }, (err, user) => {
         if (err) {
@@ -67,6 +68,23 @@ passport.use(new LocalStrategy((username, password, next) => {
 
         return next(null, user);
     });
+=======
+app.use(flash());
+passport.use(new LocalStrategy({ passReqToCallback: true}, (username, password, next) => {
+  User.findOne({ username }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return next(null, false, { message: 'Incorrect username' });
+    }
+    if (!bcrypt.compareSync(password, user.password)) {
+      return next(null, false, { message: 'Incorrect password' });
+    }
+
+    return next(null, user);
+  });
+>>>>>>> a3e8884e2614f53378d66c27fe6c92437462d73d
 }));
 
 app.use(passport.initialize());
