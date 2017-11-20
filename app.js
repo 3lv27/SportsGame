@@ -16,7 +16,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const flash = require('connect-flash');
 
-const index = require('./routes/index');
+
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 
@@ -24,7 +24,7 @@ const app = express();
 
 // database
 
-mongoose.Promise = Promise;
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/sports-game', {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE,
@@ -83,19 +83,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+
+//use routes
+
+app.use('/', auth);
 app.use('/users', users);
-app.use('/auth', auth);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  res.render("not-found");
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
