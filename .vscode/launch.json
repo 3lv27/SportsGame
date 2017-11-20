@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     // Utilizar IntelliSense para aprender acerca de los posibles atributos.
     // Mantenga el puntero para ver las descripciones de los existentes atributos 
     // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
@@ -13,4 +14,23 @@
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen"
     }]
+=======
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "nodemon",
+            "runtimeExecutable": "nodemon",
+            "program": "${workspaceFolder}/bin/www",
+            "restart": true,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        
+    ]
+>>>>>>> 9954e63f970fb807870fef664f9bcc130616486b
 }
