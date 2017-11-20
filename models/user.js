@@ -12,7 +12,10 @@ const userSchema = new Schema({
         age: Number,
         nationality: String
     },
-    sports: [String]
+    sports: {
+        type: [String],
+        enum: ['SkateBoarding', 'BMX', 'Parkour', 'Fitness', 'RollerSkating']
+    }
 }, {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });

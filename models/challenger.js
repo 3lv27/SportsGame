@@ -13,7 +13,10 @@ const challengerSchema = new Schema({
         latitud: Number,
         longitud: Number
     },
-    type: String,
+    sports: {
+        type: [String],
+        enum: ['SkateBoarding', 'BMX', 'Parkour', 'Fitness', 'RollerSkating']
+    },
     description: String,
     linkValidation: String,
     timelimit: Date,
