@@ -55,7 +55,7 @@ passport.deserializeUser((id, cb) => {
 });
 
 app.use(flash());
-passport.use(new LocalStrategy({passReqToCallback: true}, (req, username, password, next) => {
+passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
   User.findOne({ username }, (err, user) => {
     if (err) {
       return next(err);
@@ -98,7 +98,7 @@ app.use((req, res, next) => {
 // use routes
 app.use('/', index);
 app.use('/', auth);
-app.use('/users', users);
+app.use('/', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

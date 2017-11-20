@@ -69,8 +69,6 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render('auth/home', { user: req.user });
 });
 
-<<<<<<< HEAD
-=======
 /* _____ LOGOUT__________ */
 
 router.get('/logout', (req, res) => {
@@ -78,5 +76,4 @@ router.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
->>>>>>> dev
 module.exports = router;
