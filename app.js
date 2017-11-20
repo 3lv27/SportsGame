@@ -18,6 +18,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const flash = require('connect-flash');
 
+const index = require('./routes/index');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 
@@ -54,7 +55,7 @@ passport.deserializeUser((id, cb) => {
 });
 
 app.use(flash());
-passport.use(new LocalStrategy({ passReqToCallback: true}, (username, password, next) => {
+passport.use(new LocalStrategy({passReqToCallback: true}, (req, username, password, next) => {
   User.findOne({ username }, (err, user) => {
     if (err) {
       return next(err);
@@ -95,7 +96,7 @@ app.use((req, res, next) => {
 });
 
 // use routes
-
+app.use('/', index);
 app.use('/', auth);
 app.use('/users', users);
 
