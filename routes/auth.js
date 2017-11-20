@@ -45,7 +45,7 @@ router.post('/signup', (req, res, next) => {
       if (err) {
         res.render('auth/signup', { message: 'Something went wrong' });
       } else {
-        res.redirect('/auth/login');
+        res.redirect('/login');
       }
     });
   });
@@ -73,7 +73,7 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('auth/login');
+  res.redirect('/login');
 });
 
 module.exports = router;
