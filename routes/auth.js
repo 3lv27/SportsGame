@@ -54,7 +54,7 @@ router.post('/signup', (req, res, next) => {
 /* _____ LOGIN __________ */
 
 router.get('/login', (req, res, next) => {
-  res.render('auth/login', { 'message': req.flash('error') });
+  res.render('auth/login');
 });
 
 router.post('/login', passport.authenticate('local', {
@@ -67,13 +67,6 @@ router.post('/login', passport.authenticate('local', {
 // private user page
 router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render('auth/home', { user: req.user });
-});
-
-/* _____ LOGOUT__________ */
-
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('auth/login');
 });
 
 module.exports = router;
