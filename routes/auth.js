@@ -28,8 +28,16 @@ router.post('/signup', (req, res, next) => {
   }
 
   User.findOne({ username }, 'username', (err, user) => {
-    if (user !== null) {
-      res.render('auth/signup', { message: 'The username already exists' });
+    if (err) {
+      next(err);
+      return;
+    }
+
+    if (user) {
+      const data = {
+        message: 'The username already exists'
+      };
+      res.render('auth/signup', data);
       return;
     }
 
@@ -43,10 +51,13 @@ router.post('/signup', (req, res, next) => {
 
     newUser.save((err) => {
       if (err) {
-        res.render('auth/signup', { message: 'Something went wrong' });
-      } else {
-        res.redirect('/login');
+        next(err);
+        return;
       }
+
+      req.login(newUser, () => {
+        res.redirect('/profile');
+      });
     });
   });
 });
@@ -54,7 +65,7 @@ router.post('/signup', (req, res, next) => {
 /* _____ LOGIN __________ */
 
 router.get('/login', (req, res, next) => {
-  res.render('auth/login', { 'message': req.flash('error') });
+  res.render('auth/login');
 });
 
 router.post('/login', passport.authenticate('local', {
@@ -71,7 +82,7 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
 
 /* _____ LOGOUT__________ */
 
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
   req.logout();
   res.redirect('/login');
 });
