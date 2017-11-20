@@ -9,7 +9,7 @@ const challengerSchema = new Schema({
         type: ObjectId,
         ref: 'User'
     },
-    location = {
+    location: {
         latitud: Number,
         longitud: Number
     },
