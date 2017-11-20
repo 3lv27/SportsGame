@@ -18,6 +18,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const flash = require('connect-flash');
 
+const index = require('./routes/index');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 
@@ -27,33 +28,34 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/sports-game', {
-    keepAlive: true,
-    reconnectTries: Number.MAX_VALUE,
-    useMongoClient: true
+  keepAlive: true,
+  reconnectTries: Number.MAX_VALUE,
+  useMongoClient: true
 });
 
 // session
 
 app.use(session({
-    secret: 'our-passport-local-strategy-app',
-    resave: true,
-    saveUninitialized: true
+  secret: 'our-passport-local-strategy-app',
+  resave: true,
+  saveUninitialized: true
 }));
 
 // passport
 
 passport.serializeUser((user, cb) => {
-    cb(null, user._id);
+  cb(null, user._id);
 });
 
 passport.deserializeUser((id, cb) => {
-    User.findOne({ '_id': id }, (err, user) => {
-        if (err) { return cb(err); }
-        cb(null, user);
-    });
+  User.findOne({ '_id': id }, (err, user) => {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
 });
 
 app.use(flash());
+<<<<<<< HEAD
 passport.use(new LocalStrategy({ passReqToCallback: true }, (username, password, next) => {
     User.findOne({ username }, (err, user) => {
         if (err) {
@@ -68,6 +70,22 @@ passport.use(new LocalStrategy({ passReqToCallback: true }, (username, password,
 
         return next(null, user);
     });
+=======
+passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
+  User.findOne({ username }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return next(null, false, { message: 'Incorrect username' });
+    }
+    if (!bcrypt.compareSync(password, user.password)) {
+      return next(null, false, { message: 'Incorrect password' });
+    }
+
+    return next(null, user);
+  });
+>>>>>>> dev
 }));
 
 app.use(passport.initialize());
@@ -95,13 +113,12 @@ app.use((req, res, next) => {
 });
 
 // use routes
-
+app.use('/', index);
 app.use('/', auth);
-app.use('/users', users);
-
-
+app.use('/', users);
 
 // catch 404 and forward to error handler
+<<<<<<< HEAD
 
 
 
@@ -125,8 +142,24 @@ app.use(function (req, res, next) {
     err.status = 404;
     res.render('not-found');
 
+=======
+app.use(function (req, res, next) {
+  const err = new Error('Not Found');
+  err.status = 404;
+  res.render('not-found');
 });
 
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development  
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  console.error('ERROR', req.method, req.path, err);
 
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+>>>>>>> dev
+});
 
 module.exports = app;
