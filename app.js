@@ -18,9 +18,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const flash = require('connect-flash');
 
+const auth = require('./routes/auth');
+const challenges = require('./routes/challenges');
 const index = require('./routes/index');
 const users = require('./routes/users');
-const auth = require('./routes/auth');
 
 const app = express();
 
@@ -99,6 +100,7 @@ app.use((req, res, next) => {
 app.use('/', index);
 app.use('/', auth);
 app.use('/', users);
+app.use('/challenges', challenges);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -109,7 +111,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-    // set locals, only providing error in development  
+    // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
     console.error('ERROR', req.method, req.path, err);
