@@ -7,11 +7,17 @@
                 <div class="">
                     <div class="mapchallenge"><%= challengerSchema.location%></div>
                     <h3 class="challTittle"><%=challengerSchema.challengerName%></h3>
-                    <p class="challText"><%= challengerSchema.description%></p>
+                    <p class="challText"><%= challengerSchema.description.substring(0,100) +" ..."%></p>
                     <p>
                         <a href="/home">
                             <button class="buttonowner">                             
-                                <img src="puulc/owner.png" alt="Owner ">
+                                <img src="public/owner.png" alt="Owner ">
+                            </button>
+                        </a>
+
+                        <a href="/challenges/<%= challengerSchema._id %>">
+                            <button class="buttonowner">                             
+                                <img src="public/owner.png" alt="Detail ">
                             </button>
                         </a>
                         <datetime><%= challengerSchema.timulmit%></datetime>
