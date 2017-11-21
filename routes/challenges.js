@@ -7,7 +7,7 @@ const router = express.Router();
 
 const Challenge = require('../models/challenge');
 
-router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
+router.get('/new', ensureLogin.ensureLoggedIn(), (req, res) => {
   res.render('challenges/new', { user: req.user });
 });
 
