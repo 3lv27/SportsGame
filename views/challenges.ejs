@@ -1,0 +1,23 @@
+<h1>List Challengers</h1>
+
+
+    <ul>
+        <% challenger.forEach((challengerSchema) => { %>
+            <li class="challengerBox">
+                <div class="">
+                    <div class="mapchallenge"><%= location%></div>
+                    <h3 class="challTittle"><%=challengerName%></h3>
+                    <p class="challText"><%= description%></p>
+                    <p>
+                        <a href="/home">
+                            <button class="buttonowner">                             
+                                <img src="public/owner.png" alt="Owner ">
+                            </button>
+                        </a>
+                        <datetime><%= timeLimit%></datetime>
+                        <%= sport%>
+                    </p> 
+                </div>
+            </li>
+        });  
+    </ul>

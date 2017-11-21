@@ -19,7 +19,7 @@ const challengerSchema = new Schema({
     },
     description: String,
     linkValidation: String,
-    timelimit: Date,
+    timeLimit: Date,
     enrolled: {
         type: ObjectId,
         ref: "User"
