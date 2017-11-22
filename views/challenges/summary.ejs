@@ -1,9 +1,9 @@
-<h1 class="tittleDetails"><%= challengerSchema.challengerName%></h1>
+<h1 class="tittleDetails"><%= challenge.challengerName%></h1>
 <div>
-    <div class="mapDetails"><%= challengerSchema.location%></div>
+    <div class="mapDetails"><%= challenge.location%></div>
     <p>
-        <datetime class="timeDetails"><%= challengerSchema.timelimit%></datetime>
-        <a class="buttonOwnerList" href="/resume/<%= challengerSchema.owner %>">
+        <datetime class="timeDetails"><%= challenge.timelimit%></datetime>
+        <a class="buttonOwnerList" href="/resume/<%= challenge.owner %>">
             <button class="iconOwner">                             
                 <img src="public/owner.png" alt="Owner ">
                 Creator
@@ -11,13 +11,13 @@
         </a>        
     </p>
 
-    <p class="textDetails"><%= challengerSchema.description.substring (0,500) + ' ...'%></p>
+    <p class="textDetails"><%= challenge.description.substring (0,500) + ' ...'%></p>
 
     <a href="/search">
-            <button class="buttonRetireSummary">Retire</button>
+            <button class="buttonBackSummary">Back</button>
     </a>
     
-    <a href="/start">
-            <button class="buttonEnrolledSummary">Enrolled</button>
-    </a>
+    <form action="/challenges/<%= challenge._id %>" method="post">
+        <input type="submit" value="Enrroled">
+    </form>
 </div>

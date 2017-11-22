@@ -90,7 +90,7 @@ router.get('/resume/:id', (req, res) => {
         const data = {
             user: result
         };
-        res.render('/resume', data);
+        res.render('auth/resume', data);
     });
     promise.catch((error) => {
         next(error);

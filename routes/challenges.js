@@ -25,27 +25,47 @@ router.get('/search', function(req, res, next) {
     });
 });
 
-router.get('/search/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const idChallenger = req.params.id;
-    const idUser = req.user.id;
-    const promise = Challenge.find({ _id: id });
+    const idUser = req.user._id;
+    const promise = Challenge.findOne({ _id: idChallenger });
     promise.then((result) => {
         const data = {
             challenge: result
         };
 
-        let isEnrroled = false;
+        var isEnrroled = false;
         data.challenge.enrolled.forEach((item) => {
-            if (item === idUser) {
+            if ((item + '') == (idUser + '')) {
                 isEnrroled = true;
             }
         });
-
         if (isEnrroled) {
             res.render('challenges/start', data);
         } else {
             res.render('challenges/summary', data);
         }
+    });
+    promise.catch((error) => {
+        next(error);
+    });
+});
+
+router.post('/:id', (req, res, next) => {
+    const idChallenger = req.params.id;
+    const idUser = req.user._id;
+    const promise = Challenge.findOne({ _id: idChallenger });
+    promise.then((result) => {
+        let challenge = result;
+        challenge.enrolled.push(idUser);
+
+        const secondPromise = Challenge.update({ _id: idChallenger }, { $set: challenge });
+        secondPromise.then((result) => {
+            res.redirect(`/challenges/${idChallenger}`);
+        });
+        secondPromise.catch((err) => {
+            next(err)
+        });
     });
     promise.catch((error) => {
         next(error);

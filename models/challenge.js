@@ -21,10 +21,10 @@ const challengerSchema = new Schema({
     description: String,
     linkValidation: String,
     timeLimit: Date,
-    enrolled: {
-        type: [ObjectId],
+    enrolled: [{
+        type: ObjectId,
         ref: 'User'
-    }
+    }]
 }, {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
