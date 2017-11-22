@@ -3,17 +3,20 @@
     <div class="mapDetails"><%= challengerSchema.location%></div>
     <p>
         <datetime class="timeDetails"><%= challengerSchema.timelimit%></datetime>
-        <a href="/home">
-            <button class="buttonowner">                             
+        <a class="buttonOwnerList" href="/resume/<%= challengerSchema.owner %>">
+            <button class="iconOwner">                             
                 <img src="public/owner.png" alt="Owner ">
+                Creator
             </button>
         </a>        
     </p>
+
     <p class="textDetails"><%= challengerSchema.description.substring (0,500) + ' ...'%></p>
 
     <a href="/search">
             <button class="buttonRetireSummary">Retire</button>
     </a>
+    
     <a href="/start">
             <button class="buttonEnrolledSummary">Enrolled</button>
     </a>

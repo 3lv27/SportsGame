@@ -33,13 +33,19 @@ router.get('/search/:id', (req, res) => {
         const data = {
             challenge: result
         };
-        data.enrolled.forEach((item) => {
+
+        let isEnrroled = false;
+        data.challenge.enrolled.forEach((item) => {
             if (item === idUser) {
-                res.render('challenges/start', data);
-            } else {
-                res.render('challenges/summary', data);
+                isEnrroled = true;
             }
         });
+
+        if (isEnrroled) {
+            res.render('challenges/start', data);
+        } else {
+            res.render('challenges/summary', data);
+        }
     });
     promise.catch((error) => {
         next(error);

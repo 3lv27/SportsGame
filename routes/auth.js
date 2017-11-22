@@ -83,14 +83,14 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
     res.render('auth/home', data);
 });
 
-router.get('/home/:id', (req, res) => {
+router.get('/resume/:id', (req, res) => {
     const id = req.params.id;
     const promise = User.find({ _id: id });
     promise.then((result) => {
         const data = {
             user: result
         };
-        res.render('/home', data);
+        res.render('/resume', data);
     });
     promise.catch((error) => {
         next(error);
