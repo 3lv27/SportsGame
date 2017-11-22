@@ -12,52 +12,38 @@ router.get('/new', ensureLogin.ensureLoggedIn(), (req, res) => {
 });
 
 router.get('/search', function(req, res, next) {
-    let challengesOne = new Challenge({
-        challengerName: 'qwer',
-        owner: null,
-        location: {
-            latitud: 12342134,
-            longitud: 12342134
-        },
-        sports: [1, 2, 4],
-        description: 'qwerqwe',
-        linkValidation: 'qwerqwer',
-        timeLimit: null,
-        enrolled: null
-    })
-    let challengesTwo = new Challenge({
-        challengerName: 'qwerwerwqerqwer',
-        owner: null,
-        location: {
-            latitud: 1223342134,
-            longitud: 123342342134
-        },
-        sports: [1, 2, 4],
-        description: 'wqerwer',
-        linkValidation: 'qwerwqerwqer',
-        timeLimit: null,
-        enrolled: null
-    })
-    const data = {
-        challenger: [challengesOne, challengesTwo]
-    }
-    res.render('challenges/search', data);
-});
-
-router.get('/:id', (req, res) => {
-    const id = req.params.id;
-    const promise = Challenge.find({ _id: id });
+    console.log(req.user);
+    const promise = Challenge.find({});
     promise.then((result) => {
         const data = {
-            challenge: result
+            challenger: result
         };
-        res.render('challenges/details', data);
+        res.render('challenges/search', data);
     });
     promise.catch((error) => {
         next(error);
     });
 });
 
-
+router.get('/search/:id', (req, res) => {
+    const idChallenger = req.params.id;
+    const idUser = req.user.id;
+    const promise = Challenge.find({ _id: id });
+    promise.then((result) => {
+        const data = {
+            challenge: result
+        };
+        data.enrolled.forEach((item) => {
+            if (item === idUser) {
+                res.render('challenges/start', data);
+            } else {
+                res.render('challenges/summary', data);
+            }
+        });
+    });
+    promise.catch((error) => {
+        next(error);
+    });
+});
 
 module.exports = router;
