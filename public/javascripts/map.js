@@ -46,6 +46,9 @@ function startMap () {
 
   map.addListener('click', (event) => {
     placeMarker(event.latLng);
+    console.log(event.latLng);
+    document.getElementById('latitude').value = event.latLng.lat();
+    document.getElementById('longitude').value = event.latLng.lng();
   });
 
   function placeMarker (location) {
