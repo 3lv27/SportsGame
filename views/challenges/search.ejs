@@ -3,24 +3,24 @@
 
     <ul>
         <% challenger.forEach((challengerSchema) => { %>
-            <ul class="challengerBox">
-                <div class="">
-                    <div class="mapchallenge"><%= challengerSchema.location%></div>
-                    <h3 class="challTittle"><%=challengerSchema.challengerName%></h3>
-                    <p class="challText"><%= challengerSchema.description.substring(0,100) +" ..."%></p>
+            <ul class="challengerList">
+                <div class="containerList">
+                    <div class="mapList"><%= challengerSchema.location%></div>
+                    <h3 class="tittleList"><%=challengerSchema.challengerName%></h3>
+                    <p class="textList"><%= challengerSchema.description.substring(0,50) +" ..."%></p>
                     <p>
-                        <a href="/home">
-                            <button class="buttonowner">                             
+                        <a class="buttonOwnerList" href="/home/<%= challengerSchema.owner.type %>">
+                            <button class="iconOwner">                             
                                 <img src="public/owner.png" alt="Owner ">
                             </button>
                         </a>
-
+                        
+                        
                         <a href="/challenges/<%= challengerSchema._id %>">
-                            <button class="buttonowner">                             
-                                <img src="public/owner.png" alt="Detail ">
-                            </button>
+                            <button class="buttonSummaryList">Summary</button>
                         </a>
-                        <datetime><%= challengerSchema.timulmit%></datetime>
+
+                        <datetime><%= challengerSchema.timeLimit%></datetime>
                         <%= challengerSchema.sport%>
                     </p> 
                 </div>
