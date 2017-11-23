@@ -1,28 +1,35 @@
 <h1>List Challengers</h1>
 
 
-    <ul>
-        <% challenger.forEach((challenge) => { %>
-            <ul class="challengerList">
-                <div class="containerList">
-                    <div class="mapList"><%= challenge.location%></div>
-                    <h3 class="tittleList"><%=challenge.challengeName%></h3>
-                    <p class="textList"><%= challenge.description.substring(0,50) +" ..."%></p>
-                    <p>
-                        <a class="buttonOwnerList" href="/resume/<%= challenge.owner %>">
-                            <button class="iconOwner">                             
-                                <img src="public/owner.png" alt="Owner ">
-                            </button>
-                        </a>
-                        
-                        <a href="/challenges/<%= challenge._id %>">
-                            <button class="buttonSummaryList">Summary</button>
-                        </a>
-
-                        <datetime><%= challenge.timeLimit%></datetime>
-                        <%= challenge.sport%>
-                    </p> 
+<ul>
+    <% challenger.forEach((challenge) => { %>
+        <ul class="challengerList">
+            <div class="containerList">
+                <div class="mapList">
+                    <%= challenge.location%>
                 </div>
-            </ul>
+                <h3 class="tittleList">
+                    <%=challenge.challengeName%>
+                </h3>
+                <p class="textList">
+                    <%= challenge.description.substring(0,50) +" ..."%>
+                </p>
+                <p>
+                    <a class="buttonOwnerList" href="/resume/<%= challenge.owner %>">
+                        <button class="iconOwner">
+                            <img src="public/owner.png" alt="Owner ">
+                        </button>
+                    </a>
+
+                    <a href="/challenges/<%= challenge._id %>">
+                        <button class="buttonSummaryList">Summary</button>
+                    </a>
+                    <datetime>
+                        <%= challenge.timeLimit%>
+                    </datetime>
+                    <%= challenge.sport%>
+                </p>
+            </div>
+        </ul>
         <% }); %>
-    </ul>
+</ul>
