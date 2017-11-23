@@ -84,7 +84,7 @@ a {
   height: 32%;
 }
 
-color: #ff5f5e;
+/* color: #ff5f5e;
   font-family: 'Nunito', sans-serif;
   font-weight: 600;
   letter-spacing: 4px;
@@ -95,7 +95,7 @@ color: #ff5f5e;
   margin-top: 15px;
   width: 57%;
   height: 18%;
-}
+} */
 
 #map {
         height: 500px;
