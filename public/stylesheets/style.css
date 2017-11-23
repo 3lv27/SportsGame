@@ -1,11 +1,33 @@
+/* -- reset -- */
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* -- temp -- */
+
+div, header, footer {
+  border: 1px solid black;
+}
+
+
 html {
   height: 100%;
 }
 
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(120deg, #6600cc 0%, #2575fc 100%);
   background-repeat:no-repeat;
 
 }
@@ -27,5 +49,72 @@ a {
   transition: .3s ease background;
   width: 100%;
 }
+
+
+#main-title {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 360px;
+  margin-top: 12%;
+
+}
+
+#aeonian {
+  letter-spacing: 10px;
+  font-size: 43px;
+}
+
+#logo {
+  width: 55%;
+  height: auto;
+
+}
+
+#slogan {
+  letter-spacing: 5px;
+  font-size: 14px;
+}
+
+#home-div-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 150px;
+  margin-top: 8%;
+
+}
+
+.btn {
+  color: #fff;
+  border-style: none;
+  border: solid #fff 2.5px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  font-size: 105%;
+  background: none;
+  width: 75%;
+  height: 32%;
+}
+
+/* color: #ff5f5e;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  letter-spacing: 4px;
+  border-style: none;
+  border: solid #ff5f5e 1px;
+  font-size: 90%;
+  background: none;
+  margin-top: 15px;
+  width: 57%;
+  height: 18%;
+} */
+
+#map {
+        height: 500px;
+        width: 100%;
+       }
 
 

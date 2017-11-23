@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const challengerSchema = new Schema({
-  challengerName: String,
+const challengeSchema = new Schema({
+  challengeName: String,
   owner: {
     type: ObjectId,
     ref: 'User'
@@ -32,6 +32,5 @@ const challengerSchema = new Schema({
 const Challenge = mongoose.model('Challenge', challengerSchema);
 
 module.exports = Challenge;
-
 
 
