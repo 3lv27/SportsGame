@@ -1,12 +1,13 @@
+
 <div>
 
 
     <% sports.forEach(sport => { %>
 
-        <form action="/challenges/select-sport" method="POST">
+        <form id="form" action="/challenges/select-sport" method="POST">
 
             <input type="hidden" id="sport-<%=sport%>" name="sport" value="<%= sport %>">
-            <button type="submit">
+            <button class="btn" type="submit">
                 <%= sport %>
             </button>
 
