@@ -25,7 +25,7 @@ router.get('/search', function(req, res, next) {
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
     const idChallenger = req.params.id;
     const idUser = req.user._id;
     const promise = Challenge.findOne({ _id: idChallenger });
@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
             }
         });
         if (isEnrroled) {
-            res.render('challenges/start', data);
+            res.render('challenges/start/', data);
         } else {
             res.render('challenges/summary', data);
         }
@@ -72,4 +72,61 @@ router.post('/:id', (req, res, next) => {
     });
 });
 
+router.post('/start', (req, res, next) => {
+    const link = req.body.Link;
+    const idChallenger = req.params.id;
+    const promise = Challenge.findOne({ _id: idChallenger });
+    promise.then((result) => {
+        let challenge = result;
+        challenge.linkValidation = "link";
+        res.redirect(`/challenges/congrats`);
+    });
+    promise.catch((error) => {
+        next(error);
+    });
+});
+
+
+/*
+router.post('/finish/:id', (req, res, next) => {
+    const idChallenger = req.params.id;
+    const promise = Challenge.findOne({ _id: idChallenger });
+    promise.then((result) => {
+        const data = {
+            challenge: result
+        };
+
+        var isFinnish = false;
+        if ((data.challenge.link) !== null) {
+            isFinnish = true;
+        }
+
+        if (isFinnish) {
+            res.render('challenges/congrats', data);
+        } else {
+            res.render('challenges/loser', data);
+        }
+    });
+    promise.catch((error) => {
+        next(error);
+    });
+});
+
+router.post('/finnish/:id', (req, res, next) => {
+    const idChallenger = req.params.id;
+    const promise = Challenge.findOne({ _id: idChallenger });
+    promise.then((result) => {
+        let challenge = result;
+        if (challenge.link !== null) {
+            res.render('challenges/congrats', challenge);
+        } else {
+            res.render('/challenges/loser', challenge);
+        }
+
+    });
+    promise.catch((error) => {
+        next(error);
+    });
+});
+*/
 module.exports = router;

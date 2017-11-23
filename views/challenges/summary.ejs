@@ -3,10 +3,9 @@
     <div class="mapDetails"><%= challenge.location%></div>
     <p>
         <datetime class="timeDetails"><%= challenge.timelimit%></datetime>
-        <a class="buttonOwnerList" href="/resume/<%= challenge.owner %>">
+        <a class="buttonOwnerList" href="/resume/<%= challengerSchema.owner %>">
             <button class="iconOwner">                             
                 <img src="public/owner.png" alt="Owner ">
-                Creator
             </button>
         </a>        
     </p>

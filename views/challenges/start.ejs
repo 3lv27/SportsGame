@@ -1,18 +1,29 @@
-<h1 class="tittleDetails"><%= challenge.challengerName%></h1>
+<h1 class="tittleStart"><%= challenge.challengerName%></h1>
 <div>
-    <div class="mapDetails"><%= challenge.location%></div>
+    <div class="mapStart"><%= challenge.location%></div>
     <p>
-        <datetime class="timeDetails"><%= challenge.timelimit%></datetime>
+        <datetime class="timeStart"><%= challenge.timelimit%></datetime>
 
-        <a class="buttonOwnerList" href="/resume/<%= challenge.owner %>">
+        <a class="buttonOwnerList" href="/resume/<%= challenger.owner %>">
             <button class="iconOwner">                             
                 <img src="public/owner.png" alt="Owner ">
-                Creator
             </button>
         </a>    
 
     </p>
-    <p class="textDetails"><%= challenge.description%></p>
-    <p><input id="LinkValidationStart" type="video" name="Link" placeholder="Link"></p>
+    <p class="textStart"><%= challenge.description%></p>
+
+    <form action="/start/<%= challenge._id %>" method="post" id="form-link">
+        <p><input id="LinkValidationStart" type="URL" name="Link" placeholder="Link Video"></p>
+    </form>
+
+    <a href="/challenges/loser">
+        <button class="buttonLinkStart">Finnish</button>
+    </a>
+<!--
+    <form action="/finnish/<%= challenge._id %>" method="post">
+        <input type="submit" value="Finnish">
+    </form>
+-->
 </div>
 
