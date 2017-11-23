@@ -15,76 +15,79 @@ const bcryptSalt = 10;
 /* _____ SIGNUP __________ */
 
 router.get('/signup', (req, res, next) => {
-  res.render('auth/signup');
+    res.render('auth/signup');
 });
 
 router.post('/signup', (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
+    const username = req.body.username;
+    const password = req.body.password;
 
-  if (username === '' || password === '') {
-    res.render('auth/signup', { message: 'Indicate username and password' });
-    return;
-  }
-
-  User.findOne({ username }, 'username', (err, user) => {
-    if (err) {
-      next(err);
-      return;
-    }
-
-    if (user) {
-      const data = {
-        message: 'The username already exists'
-      };
-      res.render('auth/signup', data);
-      return;
-    }
-
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(password, salt);
-
-    const newUser = new User({
-      username,
-      password: hashPass
-    });
-
-    newUser.save((err) => {
-      if (err) {
-        next(err);
+    if (username === '' || password === '') {
+        res.render('auth/signup', { message: 'Indicate username and password' });
         return;
-      }
+    }
 
-      req.login(newUser, () => {
-        res.redirect('/profile');
-      });
+    User.findOne({ username }, 'username', (err, user) => {
+        if (err) {
+            next(err);
+            return;
+        }
+
+        if (user) {
+            const data = {
+                message: 'The username already exists'
+            };
+            res.render('auth/signup', data);
+            return;
+        }
+
+        const salt = bcrypt.genSaltSync(bcryptSalt);
+        const hashPass = bcrypt.hashSync(password, salt);
+
+        const newUser = new User({
+            username,
+            password: hashPass
+        });
+
+        newUser.save((err) => {
+            if (err) {
+                next(err);
+                return;
+            }
+
+            req.login(newUser, () => {
+                res.redirect('/profile');
+            });
+        });
     });
-  });
 });
 
 /* _____ LOGIN __________ */
 
 router.get('/login', (req, res, next) => {
-  res.render('auth/login');
+    res.render('auth/login');
 });
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/home',
-  failureRedirect: '/login',
-  failureFlash: true,
-  passReqToCallback: true
+    successRedirect: '/home',
+    failureRedirect: '/login',
+    failureFlash: true,
+    passReqToCallback: true
 }));
 
 // private user page
 router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render('auth/home', { user: req.user });
+    const data = {
+        user: req.user
+    };
+    res.render('auth/home', data);
 });
 
 /* _____ LOGOUT__________ */
 
 router.post('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/login');
+    req.logout();
+    res.redirect('/login');
 });
 
 module.exports = router;
