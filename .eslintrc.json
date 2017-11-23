@@ -1,49 +1,22 @@
 {
     "extends": "standard",
     "env": {
-        "browser": true,
-        "node": true,
-        "es6": true
+        "es6": true,
+        "node": true
     },
     "globals": {
-        "google": true,
-        "axios": true
+        "document": false,
+        "window": false,
+        "console": false
     },
     "rules": {
-        "space-before-function-paren": [
-            "error",
-            "never"
-        ],
-        "quotes": [
-            "error",
-            "single"
+        "indent": [
+            2,
+            2
         ],
         "semi": [
-            2,
+            "error",
             "always"
-        ],
-        "comma-dangle": [
-            "error",
-            "never"
-        ],
-        "space-in-parens": [
-            "error",
-            "never"
-        ],
-        "no-console": [
-            "error",
-            {
-                "allow": [
-                    "warn",
-                    "error"
-                ]
-            }
-        ],
-        "no-var": "error",
-        "prefer-const": "error",
-        "max-len": [
-            "error",
-            120
         ]
     }
 }

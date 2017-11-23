@@ -3,16 +3,19 @@
         <label for="username">Username:</label>
         <input type="text" name="username">
     </div>
+    <br>
+    <br>
     <div>
         <label for="password">Password:</label>
         <input type="password" name="password">
     </div>
+    <br>
     <% if (typeof message != "undefined") { %>
         <div class="error-message">
             <%= message %>
         </div>
         <% } %>
-    <div>
-        <input type="submit" value="Log In">
-    </div>
+            <div>
+                <button type="submit" value="Log In">Log in</button>
+            </div>
 </form>
