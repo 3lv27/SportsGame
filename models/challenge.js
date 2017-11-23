@@ -29,6 +29,6 @@ const challengeSchema = new Schema({
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
-const Challenge = mongoose.model('Challenge', challengerSchema);
+const Challenge = mongoose.model('Challenge', challengeSchema);
 
 module.exports = Challenge;
