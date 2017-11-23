@@ -1,0 +1,8 @@
+
+<div class="resume">
+    <p>The creator of the challenge is: <%= user.username %></p>
+    <% if(user.personalData) { %>
+    <p>Was born in <%= user.personalData.nationality %> <%= user.personalData.age %> years ago</p>
+    <% } %>
+    <p>and his favorite sport is <%= user.sports %></p>
+</div>

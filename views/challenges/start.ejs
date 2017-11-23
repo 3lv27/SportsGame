@@ -1,0 +1,21 @@
+<h1 class="tittleStart"><%= challenge.challengerName%></h1>
+<div>
+    <div class="mapStart"><%= challenge.location%></div>
+    <p>
+        <datetime class="timeStart"><%= challenge.timelimit%></datetime>
+
+        <a class="buttonOwnerList" href="/resume/<%= challenge.owner %>">
+            <button class="iconOwner">                             
+                <img src="public/owner.png" alt="Owner ">
+            </button>
+        </a>    
+
+    </p>
+    <p class="textStart"><%= challenge.description%></p>
+
+    <form action="/challenges/<%= challenge._id %>/finished %>" method="post" id="form-link">
+        <input id="LinkValidationStart" type="URL" name="Link" placeholder="Link Video">
+        <button type="submit" class="buttonLinkStart">Finnish</button>      
+    </form>
+</div>
+

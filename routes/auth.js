@@ -83,6 +83,20 @@ router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
     res.render('auth/home', data);
 });
 
+router.get('/resume/:id', (req, res) => {
+    const id = req.params.id;
+    const promise = User.find({ _id: id });
+    promise.then((result) => {
+        const data = {
+            user: result
+        };
+        res.render('auth/resume', data);
+    });
+    promise.catch((error) => {
+        next(error);
+    });
+});
+
 /* _____ LOGOUT__________ */
 
 router.post('/logout', (req, res) => {
