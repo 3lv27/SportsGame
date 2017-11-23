@@ -1,21 +1,17 @@
-<form action="/login" method="POST">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" name="username" value="Elvin">
-    </div>
-    <br>
-    <br>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" value="123">
-    </div>
-    <br>
-    <% if (typeof message != "undefined") { %>
+<div id="login-div">
+    <img id="logo-login" src="/images/aeonian-logo-w.png" alt="aeonian-logo">
+
+    <form id="form"  action="/login" method="POST">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        
+        <br>
+        <% if (typeof message != "undefined") { %>
         <div class="error-message">
             <%= message %>
         </div>
-        <% } %>
-            <div>
-                <button type="submit" value="Log In">Log in</button>
-            </div>
-</form>
+            <% } %>
+                
+        <button class="btn" type="submit" value="Log In">LOG IN</button>        
+    </form>
+</div>

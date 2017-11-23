@@ -1,25 +1,23 @@
-<h2>Signup</h2>
 
-<form action="/signup" method="POST" id="form-container">
-    <label for="username">Username</label>
-    <input id="username" type="text" name="username" placeholder="JonSnow">
-    <br>
-    <br>
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password" placeholder="Your password">
+<div id="login-div">
+    <img id="logo-login" src="/images/aeonian-logo-w.png" alt="aeonian-logo">
+    <form action="/signup" method="POST" id="form">
+        <input type="text" name="username" placeholder="Your User Name">
+        <input type="password" name="password" placeholder="Your Password">
 
-    <% if (typeof message !== "undefined") { %>
+        <% if (typeof message !== "undefined") { %>
         <div class="error-message">
             <%= message %>
         </div>
-        <% } %>
-            <br>
-            <br>
+            <% } %>
+        <br>
+        <br>
+        <button class="btn">SIGN UP</button>
 
-            <button>Create account</button>
-
-            <p class="account-message">
-                Do you already have an account?
-                <a href="/login">Login</a>
-            </p>
-</form>
+                
+    </form>
+ 
+</div>
+<div>
+    <a id="sign-log" href="/login">LOG IN</a>
+</div>
