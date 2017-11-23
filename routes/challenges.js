@@ -41,7 +41,7 @@ router.get('/:id', (req, res, next) => {
             }
         });
         if (isEnrroled) {
-            res.render('challenges/start/', data);
+            res.render('challenges/start', data);
         } else {
             res.render('challenges/summary', data);
         }
@@ -72,39 +72,18 @@ router.post('/:id', (req, res, next) => {
     });
 });
 
-router.post('/start', (req, res, next) => {
-    const link = req.body.Link;
+router.get('/:id/finished', (req, res, next) => {
     const idChallenger = req.params.id;
     const promise = Challenge.findOne({ _id: idChallenger });
     promise.then((result) => {
-        let challenge = result;
-        challenge.linkValidation = "link";
-        res.redirect(`/challenges/congrats`);
-    });
-    promise.catch((error) => {
-        next(error);
-    });
-});
-
-
-/*
-router.post('/finish/:id', (req, res, next) => {
-    const idChallenger = req.params.id;
-    const promise = Challenge.findOne({ _id: idChallenger });
-    promise.then((result) => {
+        const challenge = result;
         const data = {
             challenge: result
-        };
-
-        var isFinnish = false;
-        if ((data.challenge.link) !== null) {
-            isFinnish = true;
         }
-
-        if (isFinnish) {
+        if (challenge.linkValidation.length === 0) {
+            res.render('challenges/loser');
+        } else {
             res.render('challenges/congrats', data);
-        } else {
-            res.render('challenges/loser', data);
         }
     });
     promise.catch((error) => {
@@ -112,21 +91,16 @@ router.post('/finish/:id', (req, res, next) => {
     });
 });
 
-router.post('/finnish/:id', (req, res, next) => {
+router.post('/:id/finished', (req, res, next) => {
+    const link = req.body.Link;
     const idChallenger = req.params.id;
-    const promise = Challenge.findOne({ _id: idChallenger });
+    const promise = Challenge.findOneAndUpdate({ _id: idChallenger }, { $set: { linkValidation: link } });
     promise.then((result) => {
-        let challenge = result;
-        if (challenge.link !== null) {
-            res.render('challenges/congrats', challenge);
-        } else {
-            res.render('/challenges/loser', challenge);
-        }
-
+        res.redirect(`/challenges/${idChallenger}/finished`);
     });
     promise.catch((error) => {
         next(error);
     });
 });
-*/
+
 module.exports = router;

@@ -4,7 +4,7 @@
     <p>
         <datetime class="timeStart"><%= challenge.timelimit%></datetime>
 
-        <a class="buttonOwnerList" href="/resume/<%= challenger.owner %>">
+        <a class="buttonOwnerList" href="/resume/<%= challenge.owner %>">
             <button class="iconOwner">                             
                 <img src="public/owner.png" alt="Owner ">
             </button>
@@ -13,17 +13,9 @@
     </p>
     <p class="textStart"><%= challenge.description%></p>
 
-    <form action="/start/<%= challenge._id %>" method="post" id="form-link">
-        <p><input id="LinkValidationStart" type="URL" name="Link" placeholder="Link Video"></p>
+    <form action="/challenges/<%= challenge._id %>/finished %>" method="post" id="form-link">
+        <input id="LinkValidationStart" type="URL" name="Link" placeholder="Link Video">
+        <button type="submit" class="buttonLinkStart">Finnish</button>      
     </form>
-
-    <a href="/challenges/loser">
-        <button class="buttonLinkStart">Finnish</button>
-    </a>
-<!--
-    <form action="/finnish/<%= challenge._id %>" method="post">
-        <input type="submit" value="Finnish">
-    </form>
--->
 </div>
 
