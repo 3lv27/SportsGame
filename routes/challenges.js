@@ -7,59 +7,6 @@ const router = express.Router();
 
 const Challenge = require('../models/challenge');
 
-router.get('/new', ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render('challenges/new', { user: req.user });
-});
-
-router.get('/search', function (req, res, next) {
-  console.log(req.user);
-  const promise = Challenge.find({});
-  promise.then((result) => {
-    const data = {
-      challenger: result
-    };
-    res.render('challenges/search', data);
-  });
-  promise.catch((error) => {
-    next(error);
-  });
-});
-
-router.get('/edit', ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render('challenges/edit', { user: req.user });
-});
-
-router.post('/edit', (req, res, next) => {
-  const challengeName = req.body.challengeName;
-  const description = req.body.description;
-  const linkValidation = req.body.linkValidation;
-  const latitude = req.body.latitude;
-  const longitude = req.body.longitude;
-
-  const newChallenge = new Challenge({
-    challengeName: challengeName,
-    owner: req.user._id,
-    location: {
-      latitud: latitude,
-      longitud: longitude
-    },
-    sports: null,
-    description: description,
-    linkValidation: linkValidation,
-    timelimit: null,
-    enrolled: null
-  });
-
-  newChallenge.save((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/home');
-  });
-});
-
-//* **********************************BRYAN************************************************************* */
-/* GET users listing. */
 router.get('/select-sport', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Challenge.find({}, 'sports', (err, sports) => {
     if (err) {
@@ -77,10 +24,9 @@ router.get('/select-sport', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 router.post('/select-sport/', (req, res, next) => {
   const sport = req.body.sport;
-  console.log(sport);
   const newChallenge = new Challenge({
     challengeName: null,
-    owner: null,
+    owner: req.user._id,
     location: null,
     sports: sport,
     description: null,
@@ -89,17 +35,59 @@ router.post('/select-sport/', (req, res, next) => {
     enrolled: null
   });
 
-  newChallenge.save((err) => {
+  newChallenge.save((err, result) => {
     if (err) {
       return next(err);
     }
-    res.redirect('/new');
+    res.redirect(`/challenges/edit/${result._id}`);
   });
 });
 
-//* ****************************************************************************************************************************************************************************** */
+router.get('/edit/:id', ensureLogin.ensureLoggedIn(), (req, res) => {
+  const data = {
+    challengeId: req.params.id
+  };
+  res.render('challenges/edit', data);
+});
 
-router.get('/:id', (req, res, next) => {
+router.post('/edit/:id', (req, res, next) => {
+  const challengeName = req.body.challengeName;
+  const description = req.body.description;
+  const latitude = req.body.latitude;
+  const longitude = req.body.longitude;
+
+  const newChallenge = {
+    challengeName: challengeName,
+    location: {
+      latitud: latitude,
+      longitud: longitude
+    },
+    description: description,
+    enrolled: []
+  };
+
+  Challenge.findOneAndUpdate({ _id: req.params.id }, {$set: newChallenge}, (err, result) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/challenges/search');
+  });
+});
+
+router.get('/search', ensureLogin.ensureLoggedIn(), function (req, res, next) {
+  const promise = Challenge.find({});
+  promise.then((result) => {
+    const data = {
+      challenger: result
+    };
+    res.render('challenges/search', data);
+  });
+  promise.catch((error) => {
+    next(error);
+  });
+});
+
+router.get('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const idChallenger = req.params.id;
   const idUser = req.user._id;
   const promise = Challenge.findOne({ _id: idChallenger });
@@ -146,7 +134,7 @@ router.post('/:id', (req, res, next) => {
   });
 });
 
-router.get('/:id/finished', (req, res, next) => {
+router.get('/:id/finished', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const idChallenger = req.params.id;
   const promise = Challenge.findOne({ _id: idChallenger });
   promise.then((result) => {
