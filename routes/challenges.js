@@ -40,32 +40,28 @@ router.post('/edit', (req, res, next) => {
   });
 });
 
-//***********************************BRYAN************************************************************* */
+//* **********************************BRYAN************************************************************* */
 /* GET users listing. */
 router.get('/select-sport', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-
-
-
   Challenge.find({}, 'sports', (err, sports) => {
     if (err) {
-      return next(err)
+      return next(err);
     }
     const sport = Challenge.schema.path('sports').enumValues;
     const data = {
 
       sports: sport
 
-    }
-    res.render('selectSport', data)
+    };
+    res.render('selectSport', data);
   });
 });
 
 router.post('/select-sport/', (req, res, next) => {
-
   const sport = req.body.sport;
   console.log(sport);
   const newChallenge = new Challenge({
-    challengerName: null,
+    challengeName: null,
     owner: null,
     location: null,
     sports: sport,
@@ -79,11 +75,10 @@ router.post('/select-sport/', (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect('/new')
+    res.redirect('/new');
   });
 });
 
-//******************************************************************************************************************************************************************************* */
+//* ****************************************************************************************************************************************************************************** */
 
 module.exports = router;
-
