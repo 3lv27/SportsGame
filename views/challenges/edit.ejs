@@ -2,13 +2,11 @@
 <div id="map"></div>
 
 <div>
-    <form action="/challenges/edit" method="POST">
+    <form action="/challenges/edit/<%= challengeId %>" method="POST">
     <label for="challengeName">Name of the challenge</label>
     <input id="challengeName" name="challengeName" type="text" placeholder="Challenge's name">
     <label for="description">Description</label>
     <input id="description" name="description" type="text" placeholder="Your description">
-    <label for="linkValidation">Validation Video Link</label>
-    <input id="linkValidation" name="linkValidation" type="text" placeholder="YouTube Link">
 
     <input id="latitude" type="hidden" name="latitude">
     <input id="longitude" type="hidden" name="longitude">

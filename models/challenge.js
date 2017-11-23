@@ -21,10 +21,10 @@ const challengeSchema = new Schema({
   description: String,
   linkValidation: String,
   timelimit: Date,
-  enrolled: {
+  enrolled: [{
     type: ObjectId,
     ref: 'User'
-  }
+  }]
 }, {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
   });

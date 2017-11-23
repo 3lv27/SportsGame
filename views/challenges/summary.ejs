@@ -1,22 +1,14 @@
-<h1 class="tittleDetails"><%= challenge.challengerName%></h1>
+<h1 class="tittleDetails"><%= challenge.challengeName%></h1>
 <div>
     <div class="mapDetails"><%= challenge.location%></div>
-    <p>
-        <datetime class="timeDetails"><%= challenge.timelimit%></datetime>
-        <a class="buttonOwnerList" href="/resume/<%= challenge.owner %>">
-            <button class="iconOwner">                             
-                <img src="public/owner.png" alt="Owner ">
-            </button>
-        </a>        
-    </p>
 
-    <p class="textDetails"><%= challenge.description.substring (0,500) + ' ...'%></p>
+    <p class="textDetails"><%= challenge.description.substring (0,100) + ' ...'%></p>
 
-    <a href="/search">
+    <a href="/challenges/search">
             <button class="buttonBackSummary">Back</button>
     </a>
     
     <form action="/challenges/<%= challenge._id %>" method="post">
-        <input type="submit" value="Enrroled">
+        <button type="submit">Enrol</button>
     </form>
 </div>
