@@ -12,19 +12,22 @@ router.get('/edit', ensureLogin.ensureLoggedIn(), (req, res) => {
 });
 
 router.post('/edit', (req, res, next) => {
+  const challengeName = req.body.challengeName;
+  const description = req.body.description;
+  const linkValidation = req.body.linkValidation;
   const latitude = req.body.latitude;
   const longitude = req.body.longitude;
 
   const newChallenge = new Challenge({
-    challengeName: null,
+    challengeName: challengeName,
     owner: req.user._id,
     location: {
       latitud: latitude,
       longitud: longitude
     },
     sports: null,
-    description: null,
-    linkValidation: null,
+    description: description,
+    linkValidation: linkValidation,
     timelimit: null,
     enrolled: null
   });
@@ -33,7 +36,7 @@ router.post('/edit', (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect('/challenges/edit');
+    res.redirect('/home');
   });
 });
 
