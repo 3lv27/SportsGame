@@ -7,10 +7,10 @@ html {
   box-sizing: inherit;
 }
 
-body {
+/* body {
   margin: 0;
   padding: 0;
-}
+} */
 
 
 /* -- temp -- */
@@ -24,17 +24,66 @@ html {
   height: 100%;
 }
 
-body {
+/* body {
   
   font-family: 'Montserrat', sans-serif;
   background: linear-gradient(120deg, #6600cc 0%, #2575fc 100%);
   background-repeat:no-repeat;
 
-  /* background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%); */
-  /* background-image: linear-gradient(to top, #3278e0 0%, #d43f8d 100%); */
-  /* background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); */
+} */
 
+
+/* Background animation =========================== BRiAN */
+
+body {
+	width: 100wh;
+	height: 90vh;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  background-repeat:no-repeat;
+	background: linear-gradient(-25deg, rgba(218, 79, 36, 0.842), #8a2bc3, #de1e1e, rgb(6, 80, 61));
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 9s ease infinite;
+	-moz-animation: Gradient 9s ease infinite;
+	animation: Gradient 9s ease infinite;
 }
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 43% 0%
+	}
+	50% {
+		background-position: 58% 100%
+	}
+	100% {
+		background-position: 43% 0%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 43% 0%
+}
+	50% {
+		background-position: 58% 100%
+	}
+	100% {
+		background-position: 43% 0%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 43% 0%
+}
+	50% {
+		background-position: 58% 100%
+	}
+	100% {
+		background-position:43% 0%
+	}
+}
+/*  ========================================================================================  */
 
 a {
   color: #00B7FF;
