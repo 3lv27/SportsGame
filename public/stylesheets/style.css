@@ -15,16 +15,18 @@ body {
 
 /* -- temp -- */
 
-div, header, footer {
+/* div, header, footer {
   border: 1px solid black;
-}
+} */
 
 
 html {
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 body {
+  
   
   font-family: 'Montserrat', sans-serif;
   background: linear-gradient(120deg, #6600cc 0%, #2575fc 100%);
@@ -34,6 +36,8 @@ body {
   background-repeat:no-repeat;
 
 }
+
+
 
 
 /* Background animation =========================== BRiAN */

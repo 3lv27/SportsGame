@@ -15,7 +15,8 @@ router.get('/select-sport', ensureLogin.ensureLoggedIn(), (req, res, next) => {
     const sport = Challenge.schema.path('sports').enumValues;
     const data = {
 
-      sports: sport
+      sports: sport,
+      layout: 'layouts/main2'
 
     };
     res.render('selectSport', data);
@@ -24,10 +25,16 @@ router.get('/select-sport', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 router.post('/select-sport/', (req, res, next) => {
   const sport = req.body.sport;
+
+  const fakeLocation = {
+    type: 'Point',
+    coordinates: [0, 0]
+  };
+
   const newChallenge = new Challenge({
     challengeName: null,
     owner: req.user._id,
-    location: null,
+    location: fakeLocation,
     sports: sport,
     description: null,
     linkValidation: null,
@@ -43,9 +50,10 @@ router.post('/select-sport/', (req, res, next) => {
   });
 });
 
-router.get('/edit/:id', ensureLogin.ensureLoggedIn(), (req, res) => {
+router.get('/edit/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const data = {
-    challengeId: req.params.id
+    challengeId: req.params.id,
+    layout: 'layouts/main2'
   };
   res.render('challenges/edit', data);
 });
@@ -56,17 +64,19 @@ router.post('/edit/:id', (req, res, next) => {
   const latitude = req.body.latitude;
   const longitude = req.body.longitude;
 
+  let location = {
+    type: 'Point',
+    coordinates: [longitude, latitude]
+  };
+
   const newChallenge = {
     challengeName: challengeName,
-    location: {
-      latitud: latitude,
-      longitud: longitude
-    },
+    location: location,
     description: description,
     enrolled: []
   };
 
-  Challenge.findOneAndUpdate({ _id: req.params.id }, {$set: newChallenge}, (err, result) => {
+  Challenge.findOneAndUpdate({ _id: req.params.id }, { $set: newChallenge }, (err, result) => {
     if (err) {
       return next(err);
     }
@@ -78,7 +88,8 @@ router.get('/search', ensureLogin.ensureLoggedIn(), function (req, res, next) {
   const promise = Challenge.find({});
   promise.then((result) => {
     const data = {
-      challenger: result
+      challenger: result,
+      layout: 'layouts/main2'
     };
     res.render('challenges/search', data);
   });
@@ -93,7 +104,8 @@ router.get('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const promise = Challenge.findOne({ _id: idChallenger });
   promise.then((result) => {
     const data = {
-      challenge: result
+      challenge: result,
+      layout: 'layouts/main2'
     };
 
     var isEnrroled = false;
@@ -140,10 +152,11 @@ router.get('/:id/finished', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   promise.then((result) => {
     const challenge = result;
     const data = {
-      challenge: result
+      challenge: result,
+      layout: 'layouts/main2'
     };
     if (challenge.linkValidation.length === 0) {
-      res.render('challenges/loser');
+      res.render('challenges/loser', data);
     } else {
       res.render('challenges/congrats', data);
     }
@@ -159,6 +172,36 @@ router.post('/:id/finished', (req, res, next) => {
   const promise = Challenge.findOneAndUpdate({ _id: idChallenger }, { $set: { linkValidation: link } });
   promise.then((result) => {
     res.redirect(`/challenges/${idChallenger}/finished`);
+  });
+  promise.catch((error) => {
+    next(error);
+  });
+});
+
+router.post('/:id/results', (req, res, next) => {
+  const idChallenger = req.params.id;
+  const promise = Challenge.findOne({ _id: idChallenger });
+  promise.then((result) => {
+    const userId = req.user._id + '';
+    let newEnrroleds = [];
+
+    result.enrolled.map((value, index) => {
+      if (value + '' !== userId) {
+        newEnrroleds.push(value);
+      }
+    });
+
+    const data = {
+      linkValidation: '',
+      enrolled: newEnrroleds
+    };
+
+    Challenge.update({ _id: idChallenger }, { $set: data }, (err, result) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/home');
+    });
   });
   promise.catch((error) => {
     next(error);

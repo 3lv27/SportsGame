@@ -15,7 +15,7 @@ const bcryptSalt = 10;
 /* _____ SIGNUP __________ */
 
 router.get('/signup', (req, res, next) => {
-  res.render('auth/signup');
+  res.render('auth/signup', { layout: 'layouts/main' });
 });
 
 router.post('/signup', (req, res, next) => {
@@ -37,7 +37,7 @@ router.post('/signup', (req, res, next) => {
       const data = {
         message: 'The username already exists'
       };
-      res.render('auth/signup', data);
+      res.render('auth/signup', data), { layout: 'layouts/main' };
       return;
     }
 
@@ -65,7 +65,7 @@ router.post('/signup', (req, res, next) => {
 /* _____ LOGIN __________ */
 
 router.get('/login', (req, res, next) => {
-  res.render('auth/login');
+  res.render('auth/login'), { layout: 'layouts/main' };
 });
 
 router.post('/login', passport.authenticate('local', {
@@ -78,7 +78,8 @@ router.post('/login', passport.authenticate('local', {
 // private user page
 router.get('/home', ensureLogin.ensureLoggedIn(), (req, res) => {
   const data = {
-    user: req.user
+    user: req.user,
+    layout: 'layouts/main2'
   };
   res.render('auth/home', data);
 });
@@ -88,7 +89,8 @@ router.get('/resume/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const promise = User.findOne({ _id: id });
   promise.then((result) => {
     const data = {
-      user: result
+      user: result,
+      layout: 'layouts/main2'
     };
     res.render('auth/resume', data);
   });
@@ -103,5 +105,12 @@ router.post('/logout', (req, res) => {
   req.logout();
   res.redirect('/login');
 });
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/login');
+});
+
+
 
 module.exports = router;
