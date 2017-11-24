@@ -166,10 +166,10 @@ router.post('/:id/finished', (req, res, next) => {
 });
 
 /*
-router.post('/:id/results',(req, res, next) =>{
+router.post('/:id/results', (req, res, next) => {
     const idChallenger = req.params.id;
-    const promise = Challenge.findOne({ _id: idChallenger});
-    promise.then((result) =>{
+    const promise = Challenge.findOne({ _id: idChallenger });
+    promise.then((result) => {
         let challenge = result;
         challenge.linkValidation = undefined;
     });
@@ -178,6 +178,6 @@ router.post('/:id/results',(req, res, next) =>{
     });
 });
 
-
 */
+
 module.exports = router;

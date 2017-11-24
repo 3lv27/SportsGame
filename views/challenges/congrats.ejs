@@ -3,9 +3,9 @@
 <h1 class="tittleStart"><%= challenge.challengeName%></h1>
 <div>
     <p>
-        <a class="buttonHomeResuts" href="/home">
-            <button class="iconHome">HOME</button>
-        </a>    
+        <form action="/challenges/<%= challenge._id %>/results" method="post">
+            <button type="submit">Home</button>
+        </form>    
     </p>
 
     <p class="textStart"><%= challenge.description.substr(0,50) + " ..."%></p>
@@ -19,8 +19,7 @@
     <script src="https://apis.google.com/js/client.js?onload=init"></script>
     
     <script type="text/javascript">
-    <script>
-     
+      var linkValidation = "<%= challenge.linkValidation %>";
       var tag = document.createElement('script');
 
       tag.src = "https://www.youtube.com/iframe_api";
@@ -29,10 +28,12 @@
 
       var player;
       function onYouTubeIframeAPIReady() {
+        var aux = linkValidation.length;
+        var codeYT = linkValidation.substr( aux - 11, aux);
         player = new YT.Player('player', {
           height: '390',
           width: '640',
-          videoId: 'M7lc1UVf-VE',
+          videoId: codeYT,
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
