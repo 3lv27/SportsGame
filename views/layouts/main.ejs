@@ -13,19 +13,17 @@
 </head>
 
 <body>
-    <% if (user) { %>
-        <p>logged in as
+    <div id="user">
+        <% if (user) { %>
+        <p>Logged in as
             <%=user.username%>
         </p>
         <form action="/logout" method="post">
             <button>logout</button>
         </form>
-        <br>
-        <br>
-        <% } %>
-            <%- body %>
-
-
+        <% } %>     
+    </div>
+<%- body %>
 </body>
 
 </html>
