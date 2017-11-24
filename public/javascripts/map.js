@@ -1,6 +1,6 @@
 'use strict';
 
-function startMap () {
+function startMap() {
   var map = new google.maps.Map(
     document.getElementById('map'),
     {
@@ -45,7 +45,7 @@ function startMap () {
     document.getElementById('longitude').value = event.latLng.lng();
   });
 
-  function placeMarker (location) {
+  function placeMarker(location) {
     if (marker == null) {
       marker = new google.maps.Marker({
         position: location,
