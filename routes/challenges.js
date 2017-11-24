@@ -165,19 +165,18 @@ router.post('/:id/finished', (req, res, next) => {
     });
 });
 
-/*
+
 router.post('/:id/results', (req, res, next) => {
     const idChallenger = req.params.id;
-    const promise = Challenge.findOne({ _id: idChallenger });
+    const promise = Challenge.findOneAndUpdate({ _id: idChallenger }, { linkValidation: null });
     promise.then((result) => {
-        let challenge = result;
-        challenge.linkValidation = undefined;
+        res.redirect('/home');
     });
     promise.catch((error) => {
         next(error);
     });
 });
 
-*/
+
 
 module.exports = router;
