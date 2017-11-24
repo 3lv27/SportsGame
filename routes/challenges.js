@@ -143,7 +143,7 @@ router.get('/:id/finished', ensureLogin.ensureLoggedIn(), (req, res, next) => {
             challenge: result
         };
         if (challenge.linkValidation.length === 0) {
-            res.render('challenges/loser');
+            res.render('challenges/loser', data);
         } else {
             res.render('challenges/congrats', data);
         }
@@ -168,9 +168,29 @@ router.post('/:id/finished', (req, res, next) => {
 
 router.post('/:id/results', (req, res, next) => {
     const idChallenger = req.params.id;
-    const promise = Challenge.findOneAndUpdate({ _id: idChallenger }, { linkValidation: null });
+    const promise = Challenge.findOne({ _id: idChallenger });
     promise.then((result) => {
-        res.redirect('/home');
+
+        const userId = req.user._id + '';
+        let newEnrroleds = [];
+
+        result.enrolled.map((value, index) => {
+            if (value + '' !== userId) {
+                newEnrroleds.push(value);
+            }
+        });
+
+        const data = {
+            linkValidation: "",
+            enrolled: newEnrroleds
+        }
+
+        Challenge.update({ _id: idChallenger }, { $set: data }, (err, result) => {
+            if (err) {
+                return next(err);
+            }
+            res.redirect('/home');
+        });
     });
     promise.catch((error) => {
         next(error);
