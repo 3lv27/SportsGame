@@ -1,12 +1,19 @@
 'use strict';
 
-function startMap() {
+function startMap () {
   var map = new google.maps.Map(
-    document.getElementById('map'),
+    document.getElementById('map-search'),
     {
       zoom: 15
     }
   );
+
+  let title = challenge.challengeName;
+  let position = {
+    lat: challenge.location.coordinates[1],
+    lng: challenge.location.coordinates[0]
+  };
+  var marker = new google.maps.Marker({ position, map, title });
 
   // geolocation
   if (navigator.geolocation) {
@@ -33,25 +40,6 @@ function startMap() {
     });
   } else {
     console.log('Browser does not support geolocation.');
-  }
-
-  // marker on click
-  var marker;
-
-  map.addListener('click', (event) => {
-    placeMarker(event.latLng);
-    console.log(event.latLng);
-    document.getElementById('latitude').value = event.latLng.lat();
-    document.getElementById('longitude').value = event.latLng.lng();
-  });
-
-  function placeMarker(location) {
-    if (marker == null) {
-      marker = new google.maps.Marker({
-        position: location,
-        map: map
-      });
-    } else { marker.setPosition(location); }
   }
 }
 

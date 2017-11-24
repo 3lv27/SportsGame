@@ -1,14 +1,34 @@
-<h1 class="tittleDetails"><%= challenge.challengeName%></h1>
+<div id="map-search"></div>
+
 <div>
-    <div class="mapDetails"><%= challenge.location%></div>
+    <div class="challenge-description">
+    <h1 class="tittle">
+        <%= challenge.challengeName%>
+    </h1>
+    
+    <p class="text">
+        <%= challenge.description + ' ...'%>
+    </p>
 
-    <p class="textDetails"><%= challenge.description.substring (0,100) + ' ...'%></p>
+    </div>
 
-    <a href="/challenges/search">
-            <button class="buttonBackSummary">Back</button>
+<div id="join" >
+    <a id="form" href="/challenges/search">
+        <button class="btn">Back</button>
     </a>
     
-    <form action="/challenges/<%= challenge._id %>" method="post">
-        <button type="submit">Enrol</button>
+    <form id="form" action="/challenges/<%= challenge._id %>" method="post">
+        <a>
+            <button class="btn" type="submit">Join</button>
+        </a>
     </form>
+
+    </div>
 </div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIoSi4O6j2YmTJQFpyKg7qWHzq3zFs7UA"></script>
+
+<script type="text/javascript">
+    var challenge = <%- JSON.stringify(challenge) %>;
+</script>
+<script src="/javascripts/single-map.js"></script>
