@@ -10,10 +10,7 @@ const challengeSchema = new Schema({
     type: ObjectId,
     ref: 'User'
   },
-  location: {
-    latitud: Number,
-    longitud: Number
-  },
+  location: { type: { type: String }, coordinates: [Number] },
   sports: {
     type: String,
     enum: ['SkateBoarding', 'BMX', 'Parkour', 'Fitness', 'RollerSkating']
@@ -26,9 +23,10 @@ const challengeSchema = new Schema({
     ref: 'User'
   }]
 }, {
-    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
-  });
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+});
 
+challengeSchema.index({ location: '2dsphere' });
 const Challenge = mongoose.model('Challenge', challengeSchema);
 
 module.exports = Challenge;

@@ -24,18 +24,18 @@ html {
   height: 100%;
 }
 
-/* body {
+body {
   
   font-family: 'Montserrat', sans-serif;
   background: linear-gradient(120deg, #6600cc 0%, #2575fc 100%);
   background-repeat:no-repeat;
 
-} */
+}
 
 
 /* Background animation =========================== BRiAN */
 
-body {
+/* body {
 	width: 100wh;
 	height: 90vh;
   color: #fff;
@@ -82,8 +82,8 @@ body {
 	100% {
 		background-position:43% 0%
 	}
-}
-/*  ========================================================================================  */
+} */
+ /* ========================================================================================  */
 
 a {
   color: #00B7FF;

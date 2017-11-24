@@ -24,10 +24,16 @@ router.get('/select-sport', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 router.post('/select-sport/', (req, res, next) => {
   const sport = req.body.sport;
+
+  const fakeLocation = {
+    type: 'Point',
+    coordinates: [0, 0]
+  };
+
   const newChallenge = new Challenge({
     challengeName: null,
     owner: req.user._id,
-    location: null,
+    location: fakeLocation,
     sports: sport,
     description: null,
     linkValidation: null,
@@ -56,12 +62,14 @@ router.post('/edit/:id', (req, res, next) => {
   const latitude = req.body.latitude;
   const longitude = req.body.longitude;
 
+  let location = {
+    type: 'Point',
+    coordinates: [longitude, latitude]
+  };
+
   const newChallenge = {
     challengeName: challengeName,
-    location: {
-      latitud: latitude,
-      longitud: longitude
-    },
+    location: location,
     description: description,
     enrolled: []
   };

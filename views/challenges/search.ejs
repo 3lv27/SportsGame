@@ -1,6 +1,5 @@
-<h1>List Challengers</h1>
 
-
+<div id="map"></div>
 <ul>
     <% challenger.forEach((challenge) => { %>
         <ul class="challengerList">
@@ -12,7 +11,7 @@
                     <%=challenge.challengeName%>
                 </h3>
                 <p class="textList">
-                    <%= challenge.description.substring(0,50) +" ..."%>
+                    <%= challenge.description%>
                 </p>
                 <p>
                     <a class="buttonOwnerList" href="/resume/<%= challenge.owner %>">
@@ -33,3 +32,8 @@
         </ul>
         <% }); %>
 </ul>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIoSi4O6j2YmTJQFpyKg7qWHzq3zFs7UA"></script>
+<script type="text/javascript">
+    var challenges = <%- JSON.stringify(challenger) %>;
+</script>
+<script type="text/javascript" src="/javascripts/main-map.js"></script>
