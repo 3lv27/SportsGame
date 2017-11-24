@@ -1,14 +1,14 @@
-<h1 class="tittleDetails"><%= challenge.challengeName%></h1>
+<h1 class="tittle"><%= challenge.challengeName%></h1>
 <div>
-    <div class="mapDetails"><%= challenge.location%></div>
+    <p class="text"><%= challenge.description.substring (0,100) + ' ...'%></p>
 
-    <p class="textDetails"><%= challenge.description.substring (0,100) + ' ...'%></p>
-
-    <a href="/challenges/search">
-            <button class="buttonBackSummary">Back</button>
+    <a id="form" href="/challenges/search">
+        <button class="btn">Back</button>
     </a>
     
-    <form action="/challenges/<%= challenge._id %>" method="post">
-        <button type="submit">Enrol</button>
+    <form id="form" action="/challenges/<%= challenge._id %>" method="post">
+        <a>
+            <button class="btn" type="submit">Enrol</button>
+        </a>
     </form>
 </div>
