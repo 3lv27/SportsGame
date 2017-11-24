@@ -19,16 +19,15 @@ html {
 
 /* -- temp -- */
 
+
 /* div, header, footer {
   border: 1px solid black;
 } */
 
 html {
-  width: 100vw;
-  height: 100vh;
+    width: 100vw;
+    height: 100vh;
 }
-
-
 
 body {
     font-family: 'Montserrat', sans-serif;
@@ -36,27 +35,26 @@ body {
     background-repeat: no-repeat;
 }
 
-.navbar-header{
-   background: linear-gradient(120deg, #6600cc 0%, #2575fc 100%);
-
+.navbar-header {
+    background: linear-gradient(120deg, #6600cc 0%, #2575fc 100%);
 }
 
 .navbar-inverse .navbar-brand {
-  color: #fff;
+    color: #fff;
 }
 
 .navbar-inverse .navbar-toggle:hover {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .navbar-inverse .navbar-toggle {
-  border-color: #fff;
+    border-color: #fff;
 }
 
-.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-  border-color: none;
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+    border-color: none;
 }
-
 
 
 /* Background animation =========================== BRiAN */
@@ -252,40 +250,39 @@ a {
 } */
 
 #map {
-  height: 400px;
-  width: 100%;
-  margin-bottom: 20px;
+    height: 400px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 #map-search {
-  height: 350px;
-  width: 100%;
-  margin-bottom: 20px;
+    height: 350px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 #wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: #fff;
 }
 
 .containerList {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 5px 20px 7px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 5px 20px 7px;
 }
 
 .display {
-  display: flex;
-  flex-direction: column;
-
+    display: flex;
+    flex-direction: column;
 }
 
 .buttonSummaryList {
-  color: #fff;
+    color: #fff;
     border-style: none;
     border: solid rgba(230, 219, 219, 0.7) 1px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -308,16 +305,41 @@ a {
 }
 
 .textList {
-  font-size: 11px;
-  margin-top: 4px;
+    font-size: 11px;
+    margin-top: 4px;
 }
 
 .challenge-description {
-  border: solid #fff 2.5px;
+    border: solid #fff 2.5px;
 }
 
-#join{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+#join {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.tittle {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: capitalize;
+    line-height: 2;
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+.text {
+    font-size: 15px;
+    line-height: 2;
+    text-align: left;
+    color: rgb(255, 255, 255);
+}
+
+.tittleResults {
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: capitalize;
+    line-height: 2;
+    text-align: center;
+    color: rgb(209, 223, 17);
 }
