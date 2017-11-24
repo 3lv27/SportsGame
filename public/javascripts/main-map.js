@@ -2,7 +2,7 @@
 
 function startMap () {
   var map = new google.maps.Map(
-    document.getElementById('map'),
+    document.getElementById('map-search'),
     {
       zoom: 15
     }
